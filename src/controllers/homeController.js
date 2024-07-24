@@ -1,12 +1,7 @@
 //Este arquivo contém a lógica associada às rotas da página inicial
 
 exports.paginaInicial = (req, res) => {
-    res.send(`
-        <form action="/" method="POST">
-            Nome: <input type="text" name="nome">
-            <button>Enviar</button>
-        </form>
-    `)
+    res.render('index') //é um método do objeto res que renderiza uma visão (view) usando o motor de templates configurado, que no seu caso é o EJS.
 }
 
 exports.trataPost = (req, res) => {

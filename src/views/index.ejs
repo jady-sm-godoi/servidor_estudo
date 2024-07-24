@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testes</title>
+</head>
+<body>
+    <h1>Conceito de Views</h1>
+    
+    <div>
+        <p>
+            <strong>Views (ou Vistas)</strong> são responsáveis pela camada de apresentação em uma aplicação web. Elas são os arquivos que definem como os dados serão exibidos ao usuário final. Em um projeto que usa Express e EJS, as Views são arquivos EJS que contêm templates HTML, possivelmente com inserções dinâmicas de dados.
+        </p>
+        <h3>Arquitetura MVC</h3>
+        <p>A arquitetura MVC separa a aplicação em três componentes principais:</p>
+        <ol>
+            <li>
+                <span> Model (Modelo): </span>
+                <ul>
+                    <li>Representa a estrutura de dados e lógica de negócios da aplicação.</li>
+                    <li>Interage com o banco de dados.</li>
+                </ul>
+            </li>
+            <li>
+                <span>View (Vista):</span>
+                <ul>
+                    <li>Responsável pela interface com o usuário.</li>
+                    <li>Exibe os dados do Model para o usuário.</li>
+                    <li>Usa templates EJS para gerar HTML dinâmico.</li>
+                </ul>
+            </li>
+            <li>
+                <span>Controller (Controlador):</span>
+                <ul>
+                    <li>Intermediário entre Model e View.</li>
+                    <li>Processa as requisições dos usuários, interage com o Model e seleciona a View apropriada para a resposta.</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <div>
+        <form action="/" method="POST">
+            Nome: <input type="text" name="nome">
+            <button>Enviar</button>
+        </form>
+    </div>
+</body>
+</html>

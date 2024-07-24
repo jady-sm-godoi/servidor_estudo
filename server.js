@@ -3,14 +3,29 @@ Este é o arquivo principal do seu servidor. Aqui, você configura o servidor e 
 */
 const express = require('express')
 const app = express()
-const routes = require('./routes')
+const routes = require('./routes') //Isso permite que você use as rotas definidas nesse arquivo no seu aplicativo principal (server.js).
+const path = require('path') //Esta linha importa o módulo path do Node.js, que fornece utilitários para trabalhar com caminhos de arquivos e diretórios.
 
 app.use(express.urlencoded({extended: true}))
 /*
 é um middleware que permite que o Express analise dados codificados em URL (como os dados enviados de um formulário HTML). O { extended: true } permite que objetos aninhados sejam analisados corretamente.
 */
 
+app.set('views', path.resolve(__dirname, 'src', 'views'))
+/*
+Esta linha configura o diretório onde estão localizadas as vistas (arquivos de template) da sua aplicação.
+path.join(__dirname, 'src', 'views') combina o caminho atual do diretório (__dirname) com 'src' e 'views' para formar o caminho completo para a pasta de vistas.
+*/
+app.set('view engine', 'ejs')
+/*
+Esta linha configura o Express para usar o EJS (Embedded JavaScript) como o motor de templates da aplicação.
+O EJS é uma linguagem de templates que permite gerar HTML com JavaScript. Ele facilita a criação de páginas HTML dinâmicas, onde você pode inserir dados dinamicamente no HTML.
+*/
+
 app.use(routes)
+/*
+Esta linha adiciona o middleware de rotas ao seu aplicativo. Isso significa que todas as rotas definidas em routes.js serão usadas pelo seu aplicativo.
+ */
 
 
 
