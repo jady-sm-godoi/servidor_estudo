@@ -11,6 +11,11 @@ app.use(express.urlencoded({extended: true}))
 é um middleware que permite que o Express analise dados codificados em URL (como os dados enviados de um formulário HTML). O { extended: true } permite que objetos aninhados sejam analisados corretamente.
 */
 
+app.use(express.static(path.resolve(__dirname, 'public')))
+/*
+você está dizendo ao Express para servir todos os arquivos estáticos encontrados na pasta public. Isso significa que qualquer arquivo colocado nessa pasta será acessível diretamente pelo navegador.
+*/
+
 app.set('views', path.resolve(__dirname, 'src', 'views'))
 /*
 Esta linha configura o diretório onde estão localizadas as vistas (arquivos de template) da sua aplicação.
