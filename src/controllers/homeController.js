@@ -22,6 +22,22 @@ Este código ilustra operações básicas de interação com um banco de dados M
 
     
 exports.paginaInicial = (req, res) => {
+    // req.session.usuario = { nome: 'Jady Godoi', logado: true}
+    console.log(req.session.usuario)
+    /*
+    Aqui criamos um objeto com dados do usuário guardados na sessão do usuário. Esses dados ficarão guardados por 7 dias como foi configurado no server.js
+    */
+
+    // req.flash('info', 'Olá mundo!')
+    // req.flash('error', 'uma mensagem de erro.')
+    // req.flash('success', 'uma mensagem de sucesso.')
+    console.log(req.flash('info'), req.flash('success'), req.flash('error'))
+    /*
+    connect-flash
+        Mensagens Temporárias:
+            connect-flash é usado para enviar mensagens temporárias entre requisições. Essas mensagens são armazenadas na sessão e removidas assim que são acessadas.
+    */
+
     res.render('index') //é um método do objeto res que renderiza uma visão (view) usando o motor de templates configurado, que no seu caso é o EJS.
 }
 

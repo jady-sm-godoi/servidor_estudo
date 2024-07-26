@@ -22,9 +22,31 @@ mongoose.connect(process.env.CONECTIONSTRING)
     })
     .catch(e  => console.log(e))
 
+    /*
+    express-session, connect-mongo e connect-flash: Esse é um padrão comum para gerenciar sessões de usuários em uma aplicação Express com persistência de sessão em MongoDB.
+    */
+const session = require('express-session') //Biblioteca para gerenciar sessões em Express.
+const MongoStore = require('connect-mongo') //Biblioteca para armazenar sessões em MongoDB.
+const flash = require('connect-flash') //Biblioteca para enviar mensagens temporárias (flash messages) entre requisições.
+
+const sesseionOptions = session({
+    secret: 'umachavequalquerparaasessao', // Chave secreta usada para assinar o cookie da sessão. Deve ser uma string única e complexa para garantir a segurança das sessões.
+    store: MongoStore.create({mongoUrl: process.env.CONECTIONSTRING}), //Define onde as sessões serão armazenadas. Aqui, é usado o connect-mongo para armazenar as sessões no MongoDB, utilizando a string de conexão definida em process.env.CONECTIONSTRING.
+    resave: false, //Se falso, evita que a sessão seja salva novamente no armazenamento se não foi modificada.
+    saveUninitialized: false, //Se falso, evita que sessões não inicializadas (novas, sem modificações) sejam salvas.
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7, //Tempo de vida do cookie em milissegundos.
+        httpOnly: true //Se verdadeiro, o cookie não pode ser acessado via JavaScript no navegador, aumentando a segurança contra ataques XSS (Cross-Site Scripting).
+    }
+})
+
 const routes = require('./routes') //Isso permite que você use as rotas definidas nesse arquivo no seu aplicativo principal (server.js).
 const path = require('path') //Esta linha importa o módulo path do Node.js, que fornece utilitários para trabalhar com caminhos de arquivos e diretórios.
 const {middlewareGlobal} = require('./src/middlewares/middleware')
+
+app.use(sesseionOptions)
+
+app.use(flash())
 
 app.use(express.urlencoded({extended: true}))
 /*

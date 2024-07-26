@@ -80,6 +80,36 @@ O mongoose é uma biblioteca de modelagem de dados para MongoDB, que fornece uma
 - Operações CRUD Simplificadas: Fornece uma API para criar, ler, atualizar e deletar documentos.
 - Middleware e Hooks: Suporta middleware para adicionar lógica antes ou depois de operações de banco de dados.
 
+## express-session
+```bash
+    npm install express-session
+```
+A biblioteca express-session é usada para gerenciar sessões em uma aplicação Express. Sessões permitem que você armazene dados específicos do usuário entre diferentes requisições HTTP.
+### Benefícios:
+- Persistência de Dados: Armazena dados do usuário entre requisições.
+- Autenticação: Facilita a implementação de sistemas de login.
+
+## connect-mongo
+```bash
+    npm install connect-mongo
+```
+A biblioteca connect-mongo é um armazenamento de sessão para o express-session que usa MongoDB.
+### Benefícios:
+- Persistência em Banco de Dados: Armazena sessões no MongoDB, útil para aplicações distribuídas ou que precisam de persistência de sessão.
+
+
+## connect-flash
+```bash
+    npm install connect-flash
+``` 
+A biblioteca connect-flash é usada para enviar mensagens temporárias entre requisições, frequentemente usadas para mensagens de erro ou sucesso.
+### Benefícios:
+- Mensagens Temporárias: Envia mensagens entre requisições HTTP.
+- Notificações: Útil para mostrar mensagens de sucesso ou erro após redirecionamentos.
+
+
+<br>
+<hr>
 
 # Conclusão
 Este projeto fornece uma base sólida para começar a desenvolver servidores com Node.js e Express. Explore a documentação oficial do Node.js e do Express para aprender mais sobre as funcionalidades avançadas e melhores práticas.
