@@ -61,6 +61,24 @@ Express é um framework minimalista para Node.js que facilita a criação de ser
 ## Nodemon
 Nodemon é uma ferramenta que ajuda no desenvolvimento de aplicativos baseados em Node.js reiniciando automaticamente o servidor quando mudanças nos arquivos do projeto são detectadas. Isso economiza tempo e melhora a produtividade.
 
+## dotenv
+```bash
+    npm install dotenv 
+```
+A dotenv é uma biblioteca usada para carregar variáveis de ambiente de um arquivo .env para process.env.
+### Benefícios:
+- Segurança: Mantém credenciais e configurações sensíveis fora do código-fonte.
+- Portabilidade: Facilita a configuração em diferentes ambientes (desenvolvimento, teste, produção).
+
+## mongoose
+```bash
+    npm install mongoose
+```
+O mongoose é uma biblioteca de modelagem de dados para MongoDB, que fornece uma API para criar esquemas, modelos e realizar operações CRUD.
+### Benefícios:
+- Modelagem de Dados: Facilita a definição de esquemas de dados e validações.
+- Operações CRUD Simplificadas: Fornece uma API para criar, ler, atualizar e deletar documentos.
+- Middleware e Hooks: Suporta middleware para adicionar lógica antes ou depois de operações de banco de dados.
 
 
 # Conclusão
