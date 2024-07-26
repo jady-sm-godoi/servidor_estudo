@@ -1,8 +1,27 @@
 /*
 Este é o arquivo principal do seu servidor. Aqui, você configura o servidor e define middleware global, além de importar e usar as rotas definidas em outro arquivo.
 */
+
+require('dotenv').config() //dotenv é uma biblioteca que carrega variáveis de ambiente de um arquivo .env para process.env em Node.js. Isso é útil para configurar variáveis de ambiente em projetos de forma fácil e segura, especialmente para manter informações sensíveis, como senhas e chaves de API, fora do código-fonte.
+
 const express = require('express')
 const app = express()
+
+/*
+Importação do Mongoose: Para usar a biblioteca Mongoose.
+Conexão ao MongoDB: Usa mongoose.connect com uma string de conexão armazenada em uma variável de ambiente.
+Promise: Manipula a conexão bem-sucedida e os erros.
+Evento pronto: Sinaliza que a aplicação está pronta para aceitar solicitações após a conexão com o banco de dados.
+Este padrão é útil para garantir que a aplicação só começa a aceitar solicitações depois que a conexão com o banco de dados está estabelecida, proporcionando uma inicialização mais segura e robusta.
+*/
+const mongoose = require('mongoose')
+
+mongoose.connect(process.env.CONECTIONSTRING)
+    .then(() => {
+        app.emit('pronto')
+    })
+    .catch(e  => console.log(e))
+
 const routes = require('./routes') //Isso permite que você use as rotas definidas nesse arquivo no seu aplicativo principal (server.js).
 const path = require('path') //Esta linha importa o módulo path do Node.js, que fornece utilitários para trabalhar com caminhos de arquivos e diretórios.
 const {middlewareGlobal} = require('./src/middlewares/middleware')
@@ -35,9 +54,9 @@ Esta linha adiciona o middleware de rotas ao seu aplicativo. Isso significa que 
  */
 
 
-
-
-app.listen(3000, () => { //faz com que o aplicativo comece a escutar conexões na porta 3000.
-    console.log('http://localhost:3000')
-    console.log('servidor executando na porta 3000')
+app.on('pronto', () => {
+    app.listen(3000, () => { //faz com que o aplicativo comece a escutar conexões na porta 3000.
+        console.log('http://localhost:3000')
+        console.log('servidor executando na porta 3000')
+    })
 })
