@@ -42,11 +42,18 @@ const sesseionOptions = session({
 
 const routes = require('./routes') //Isso permite que você use as rotas definidas nesse arquivo no seu aplicativo principal (server.js).
 const path = require('path') //Esta linha importa o módulo path do Node.js, que fornece utilitários para trabalhar com caminhos de arquivos e diretórios.
-const {middlewareGlobal} = require('./src/middlewares/middleware')
+const helmet = require('helmet') //Esta linha importa o módulo Helmet que é usado para melhorar a segurança de sua aplicação Express.
+const csrf = require('csurf') //Esta linha importa o módulo csurf que protege contra ataques CSRF.
+const {middlewareGlobal, checkCsrfError, csrfMiddleware} = require('./src/middlewares/middleware')
 
 app.use(sesseionOptions)
 
 app.use(flash())
+
+app.use(helmet())
+/*
+Helmet é um middleware para aplicações Node.js que ajuda a proteger sua aplicação web configurando de forma adequada os HTTP headers de segurança. Ele fornece uma camada extra de proteção contra vulnerabilidades comuns, como Cross-Site Scripting (XSS), clickjacking e ataques de injeção de código.
+*/
 
 app.use(express.urlencoded({extended: true}))
 /*
@@ -69,7 +76,15 @@ Esta linha configura o Express para usar o EJS (Embedded JavaScript) como o moto
 O EJS é uma linguagem de templates que permite gerar HTML com JavaScript. Ele facilita a criação de páginas HTML dinâmicas, onde você pode inserir dados dinamicamente no HTML.
 */
 
+app.use(csrf())
+/*
+O csurf é um middleware para proteger aplicações web contra ataques de Cross-Site Request Forgery (CSRF). Esse tipo de ataque acontece quando uma ação maliciosa é realizada em nome de um usuário autenticado sem o seu consentimento. O csurf gera tokens que verificam se a requisição veio de uma fonte confiável, como o próprio site do usuário, e não de um site externo malicioso.
+ */
 app.use(middlewareGlobal); //todas as requisições, em todos os métodos em todas as rotas vão passar por esse middleware global.
+
+app.use(checkCsrfError)
+app.use(csrfMiddleware)
+
 app.use(routes)
 /*
 Esta linha adiciona o middleware de rotas ao seu aplicativo. Isso significa que todas as rotas definidas em routes.js serão usadas pelo seu aplicativo.

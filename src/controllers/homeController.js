@@ -38,7 +38,10 @@ exports.paginaInicial = (req, res) => {
             connect-flash é usado para enviar mensagens temporárias entre requisições. Essas mensagens são armazenadas na sessão e removidas assim que são acessadas.
     */
 
-    res.render('index') //é um método do objeto res que renderiza uma visão (view) usando o motor de templates configurado, que no seu caso é o EJS.
+    res.render('index', { //inejtando dados no template do index para home.
+        titulo: 'Este é o título injetado por ejs',
+        numeros: [1,2,3,4,5,6,7,8,9]
+    }) //é um método do objeto res que renderiza uma visão (view) usando o motor de templates configurado, que no seu caso é o EJS.
 }
 
 exports.trataPost = (req, res) => {
